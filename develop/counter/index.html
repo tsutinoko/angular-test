@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>counterのテスト by syntagme.js</title>
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="jumbotron">
+        <h1>Counter</h1>
+        <p>syntagme.jsを使用したFluxを練習するためのサンプルコードです</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <p class="lead">現在の数値：<span id="result-count">0</span></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="counter">
+          <p >加減算する数値を入力したあと、送信するボタンをクリックください</p>
+          <p id="current-count" class=current-count>0</p>
+          <div class="btn-group btn-group-lg">
+            <button id="increment-btn" class="btn btn-primary">+1</button>
+            <button id="decrement-btn" class="btn btn-danger">-1</button>
+          </div>
+          <button id="submit-btn" class="btn btn-success">送信する</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="../js/component.js"></script>
+</body>
+</html>

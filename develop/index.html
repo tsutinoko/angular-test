@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ja" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>angularのテスト</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="jumbotron">
+          <h1 class="display-3">Angular JS</h1>
+          <p class="lead">これはAngularJSのテストです！</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-4">
+            <h2>テキストを表示</h2>
+            <div class="form-group">
+                <input class="form-control" type="text" ng-model="yourName">
+            </div>
+            <p>Hello {{yourName}}!</p>
+        </div>
+        <div class="col-xs-12 col-md-4">
+            <h2>JSを使用した判定</h2>
+            <div class="form-group">
+                <input class="form-control" type="text" ng-model="x">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="text" ng-model="y">
+            </div>
+            <p>{{x}} vs {{y}} : {{( x > y ) ? x : y}} is big.</p>
+        </div>
+        <div class="col-xs-12 col-md-4">
+            <h2>フィルター</h2>
+            <p>{{12345678|number}}</p>
+            <p>{{12.34|number:4}}</p>
+            <p>{{[1,100,20,2,4]|orderBy}}</p>
+            <p>{{{name:"Yamada", age:36}|json}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-4" ng-controller="myController">
+            <h2>Controller経由</h2>
+            {{message}}
+        </div>
+        <div class="col-xs-12 col-md-4" ng-controller="thisController as thisCtrl">
+            <h2>Controller経由(thisでも可)</h2>
+            {{thisCtrl.message}}
+        </div>
+        <div class="col-xs-12 col-md-4" ng-controller="listController as listCtrl">
+            <h2>配列をループ</h2>
+            <ul>
+                <li ng-repeat="member in listCtrl.members|orderBy:'age'">{{member.name}} {{member.age}}</li>
+            </ul>
+            <div>{{listCtrl.members.length}} members</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-4" ng-controller="searchController as listCtrl">
+            <h2>テキストで絞り込み</h2>
+            <div class="form-group">
+                <input class="form-control" type="text" ng-model="searchText">
+            </div>
+            <ul>
+                <li ng-repeat="member in listCtrl.members|filter:searchText">{{member.name}} {{member.age}}</li>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-md-4" ng-controller="actionController as myCtrl">
+            <h2>アクション</h2>
+            <p>{{myCtrl.count}}</p>
+            <button class="btn btn-success" ng-click="myCtrl.inc()">+1</button>
+            <button class="btn btn-danger" ng-click="myCtrl.dec()">-1</button>
+        </div>
+        <div class="col-xs-12 col-md-4">
+            <h2>バリデーション</h2>
+            <form name="myForm" novalidate>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="text1" ng-model="sampleText" ng-required="true" ng-minlength=3 ng-maxlength=8>
+                    <small class="form-text text-danger" ng-show="myForm.text1.$error.required">Required</small>
+                </div>
+                <div class="alert alert-danger" role="alert" ng-show="myForm.text1.$error.minlength">Too short!</div>
+                <div class="alert alert-danger" role="alert" ng-show="myForm.text1.$error.maxlength">Too long!</div>
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12" ng-controller="addListController as myCtrl">
+            <div class="form-inline">
+                <div class="form-group">
+                    <input class="form-control" type="text" ng-model="myCtrl.name" placeholder="name">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="number" ng-model="myCtrl.age" placeholder="age">
+                </div>
+            </div>
+             <button class="btn btn-primary" ng-click="myCtrl.onAdd()">Add</button>
+             <div>
+                 <label class="custom-control custom-checkbox" ng-repeat="member in myCtrl.members">
+                    <input class="custom-control-input" type="checkbox" ng-model="member.checked">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">{{member.name}}{{member.age}}</span>
+                </label>
+             </div>
+             <div><button class="btn btn-danger" ng-click="myCtrl.onDel()">Del</button></div>
+             <pre><code>{{myCtrl|json}}</code></pre>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/angular.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
